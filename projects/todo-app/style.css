@@ -13,9 +13,21 @@ button {
     font: inherit;
 }
 
-input {
-    padding: 5px;
+/* || VARIABLES */
+
+:root {
+    --LIGHT-GREEN: #4CAF50;
+    --HEADER-BG-COLOR: var(--LIGHT-GREEN);
+    --BODY-BG-COLOR: #f5f5f5;
+    --H2-COLOR: var(--LIGHT-GREEN);
+    --TASK-BG-COLOR: #e8f5e9;
+    --BUTTON-BG-COLOR: var(--LIGHT-GREEN);
+
 }
+
+
+/* || GENERAL STYLES */
+
 
 html {
     background-color: white;
@@ -24,32 +36,29 @@ html {
 body {
     width: 50%;
     margin: 0 auto;
-    background-color: aqua;
+    background-color: var(--BODY-BG-COLOR);
     min-height: 100vh;
     box-shadow: 0 0 10px #333;
 }
 
-:root {
-    --background: #5e72c1;
-    --color: black;
-    --task-background: #eeeff3;
-    --task-hover-background: #f9fafe;
-    --task-completed-color: #666;
-    --delete-color: firebrick;
+input[type="text"] {
+    padding: 5px;
 }
 
 header {
-    background-color: brown;
+    background-color: var(--HEADER-BG-COLOR);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2, h3 {
     margin-bottom: 1rem;
 }
 
-h1 {
-    padding: 10px;
-    text-align: center;
-    color: white;
+h2 {
+    color: var(--H2-COLOR);
 }
 
 main {
@@ -65,46 +74,136 @@ dialog {
     width: 300px;
     border-radius: 8px;
     padding: 20px;
-    background-color: #fff;
+    background-color: #c09f9f;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-.listItem {
-    margin: 1rem 0;
-    padding: 1rem;
-    display: flex;
-    list-style-type: none;
-    border: 1px solid gray;
-    border-radius: 5px;
 }
 
+#task-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+
+#taskList {
+    font-size: 1.2rem;
+    list-style-type: none;
+}
+
+.task {
+    background-color: var(--TASK-BG-COLOR);
+    margin: 1rem 0;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    /* border: 1px solid gray;
+    border-radius: 5px; */
+}
+
+.task:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
 .newItemBtnCnt {
     text-align: center;
-    position: fixed;
-    bottom: 10px;
+    margin-top: 1.5rem;
 }
 
 .newItemBtn {
-    text-align: center;
-    width: 4em;
-    height: 4em;
+    background-color: var(--BUTTON-BG-COLOR);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1.5rem;
     border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.newItemBtn:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.newItemBtn:active {
+    transform: scale(1);
+}
+
+dialog {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    background-color: #ffffff;
+    max-width: 400px;
+    width: 100%;
+}
+
+
+dialog h3 {
+    margin-top: 0;
+    color: var(--LIGHT-GREEN);
+}
+
+
+dialog input[type="text"] {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+
+dialog button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+dialog button:hover {
+    background-color: #45a049;
 }
 
 .markChecked {
     text-decoration: line-through;
 }
 
-.listItem input[type="checkbox"] {
-    height: 1rem;
-    width: 1rem;
-    border-radius: 50%;
-    border: solid 1px black;
-    outline: none;
+.task input[type="checkbox"] {
     appearance: none;
+
+    /* display: grid;
+    place-content: center;
+     */
+    position: relative;
+    background-color: #fff;
+    height: 1.5em;
+    width: 1.5em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.1em;
 }
 
-.listItem input[type="checkbox"]:checked {
-    background-color: gray;
+.task input[type="checkbox"]::before {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    content: '✓';
+    width: 1em;
+    height: 1em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+}
+
+.task input[type="checkbox"]:checked::before {
+    transform: scale(1);
 }

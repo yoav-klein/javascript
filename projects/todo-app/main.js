@@ -6,44 +6,49 @@ const dialog = document.querySelector("dialog");
 
 const taskList = document.querySelector("#taskList");
 
+function generateUniqueId(prefix = "id") {
+    const timestamp = Date.now(); // Current timestamp in milliseconds
+    const randomNumber = Math.floor(Math.random() * 1000000); // Random number
+    return `${prefix}-${timestamp}-${randomNumber}`;
+  }
+
 newItemBtn.addEventListener('click', () => {
     dialog.showModal();
 })
 
 insertBtn.addEventListener('click', (e) => {
 
-    const listItem = document.createElement("li");
-    listItem.setAttribute("class", "listItem");
+    const task = document.createElement("li");
+    task.setAttribute("class", "task");
 
-    const text = document.createElement("span");
-    text.textContent = taskInput.value;
+    const taskID = generateUniqueId();
 
-    const markCompleteLabel = document.createElement("label");
+    const label = document.createElement("label");
+    label.textContent = taskInput.value;
+    label.setAttribute('for', taskID);
 
-    const markCompleteInput = document.createElement("input");
-    markCompleteInput.type = "checkbox";
-    markCompleteInput.setAttribute("class", "box");
+    const markCompleteChk = document.createElement("input");
+    markCompleteChk.type = "checkbox";
+    markCompleteChk.setAttribute("class", "box");
+    markCompleteChk.id = taskID;
 
     const deleteBtn = document.createElement('button');
     deleteBtn.setAttribute("class", "delete");
     deleteBtn.textContent = '╳';
 
-    markCompleteLabel.appendChild(markCompleteInput);
-    markCompleteLabel.appendChild(text);
-    markCompleteLabel.appendChild(deleteBtn);
+    task.appendChild(markCompleteChk);
+    task.appendChild(label);
+    task.appendChild(deleteBtn);
 
-
-    listItem.appendChild(markCompleteLabel);
-
-    markCompleteInput.addEventListener('click', (e) => {
+    markCompleteChk.addEventListener('click', (e) => {
         if(e.target.checked) {
-            text.classList.add('markChecked');
+            label.classList.add('markChecked');
         } else {
-            text.classList.remove('markChecked');
+            label.classList.remove('markChecked');
         }
     })
 
-    taskList.appendChild(listItem);
+    taskList.appendChild(task);
 
     dialog.close();
 })
