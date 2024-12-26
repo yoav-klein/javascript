@@ -32,6 +32,17 @@ newItemBtn.addEventListener('click', () => {
     dialogEl.showModal();
 })
 
+function renderTaskListGate() {
+    let taskArrayToRender;
+    if(filterEl.value) {
+        taskArrayToRender = filterListByText(allTasksArray);
+    } else {
+        taskArrayToRender = allTasksArray;
+    }
+
+    renderTaskList(taskArrayToRender);
+}
+
 function renderTaskList(taskArray) {
     taskListEl.innerHTML = '';
 
@@ -57,8 +68,7 @@ function renderTaskList(taskArray) {
         deleteBtn.addEventListener('click', () => {
             const index = allTasksArray.findIndex(t => t.id === task.id);
             allTasksArray.splice(index, 1);
-            renderTaskList(allTasksArray);
-            filterEl.value = '';
+            renderTaskListGate();
         });
         
         taskListEl.appendChild(taskEl);
@@ -70,28 +80,22 @@ insertBtn.addEventListener('click', (e) => {
     const newTask = new Task(taskInput.value);
     allTasksArray.push(newTask);
     taskInput.value = '';
-    renderTaskList(allTasksArray);
 
     dialogEl.close();
+    renderTaskListGate();
 })
 
-filterEl.addEventListener('keyup', (e) => {
-    console.log("KEYDOWN");
+function filterListByText(taskArray) {
     const currentValue = filterEl.value;
     const foundTasks = [];
-
-    if(currentValue === '') {
-        renderTaskList(allTasksArray);
-    }
     
-    for(const task of allTasksArray) {
-        console.log(`${task.description}.includes(${currentValue}): ${task.description.toLowerCase().includes(currentValue.toLowerCase())}`)
+    for(const task of taskArray) {
         if(task.description.toLowerCase().includes(currentValue.toLowerCase())) {
             foundTasks.push(task);
         }
     }
 
-    renderTaskList(foundTasks);
-})
+    return foundTasks;
+}
 
-renderTaskList(allTasksArray);
+filterEl.addEventListener('keyup', renderTaskListGate);
