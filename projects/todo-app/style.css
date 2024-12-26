@@ -17,10 +17,10 @@ button {
 
 :root {
     --LIGHT-GREEN: #4CAF50;
-    --HEADER-BG-COLOR: var(--LIGHT-GREEN);
     --BODY-BG-COLOR: #f5f5f5;
-    --H2-COLOR: var(--LIGHT-GREEN);
     --TASK-BG-COLOR: #e8f5e9;
+    --HEADER-BG-COLOR: var(--LIGHT-GREEN);
+    --H2-COLOR: var(--LIGHT-GREEN);
     --BUTTON-BG-COLOR: var(--LIGHT-GREEN);
 
 }
@@ -69,14 +69,6 @@ section {
     margin: 10px;
 }
 
-dialog {
-    margin: auto;
-    width: 300px;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #c09f9f;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
 #task-section {
     background-color: white;
@@ -137,6 +129,8 @@ dialog {
 }
 
 dialog {
+    margin: auto;
+    
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -156,7 +150,7 @@ dialog h3 {
 dialog input[type="text"] {
     width: 100%;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 0.15em;
     margin-bottom: 1rem;
 }
 
@@ -179,31 +173,38 @@ dialog button:hover {
     text-decoration: line-through;
 }
 
+/* || CHECKBOX STYLING */
+
+.task label {
+    cursor: pointer;
+    display: flex;
+}
+
 .task input[type="checkbox"] {
     appearance: none;
-
-    /* display: grid;
-    place-content: center;
-     */
-    position: relative;
-    background-color: #fff;
-    height: 1.5em;
-    width: 1.5em;
-    border: 0.15em solid currentColor;
-    border-radius: 0.1em;
 }
 
-.task input[type="checkbox"]::before {
-    position: absolute;
-    top: 0;
-    left: 10%;
-    content: '✓';
+/* this will create our own checkbox icon */
+.task label::before {
+    content: '';
     width: 1em;
     height: 1em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
+    border: 0.05em solid black;
+    border-radius: 0.15em;
+    margin-right: .5em;
 }
 
-.task input[type="checkbox"]:checked::before {
-    transform: scale(1);
+/* hover effect */
+.task label:hover::before {
+    background-color: #35E07D;
 }
+
+.task input[type="checkbox"]:checked + label::before {
+    content: '\002714';
+    background-color: #27AE60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+

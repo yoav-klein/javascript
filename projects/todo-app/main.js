@@ -29,26 +29,23 @@ insertBtn.addEventListener('click', (e) => {
 
     const markCompleteChk = document.createElement("input");
     markCompleteChk.type = "checkbox";
-    markCompleteChk.setAttribute("class", "box");
     markCompleteChk.id = taskID;
 
     const deleteBtn = document.createElement('button');
     deleteBtn.setAttribute("class", "delete");
-    deleteBtn.textContent = '╳';
+    deleteBtn.textContent = 'X';
 
     task.appendChild(markCompleteChk);
     task.appendChild(label);
     task.appendChild(deleteBtn);
 
-    markCompleteChk.addEventListener('click', (e) => {
-        if(e.target.checked) {
-            label.classList.add('markChecked');
-        } else {
-            label.classList.remove('markChecked');
-        }
-    })
-
     taskList.appendChild(task);
+
+    task.addEventListener('click', event => {
+        if(event.target === deleteBtn) {
+            task.remove();
+        }
+    });
 
     dialog.close();
 })
