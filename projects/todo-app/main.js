@@ -2,6 +2,7 @@
 class Task {
     id;
     description;
+    state;
     
     generateUniqueId(prefix = "id") {
         const timestamp = Date.now(); // Current timestamp in milliseconds
@@ -12,6 +13,7 @@ class Task {
     constructor(description) {
         this.description = description;
         this.id = this.generateUniqueId();
+        this.state = "pending";
     }
 }
 
@@ -22,6 +24,7 @@ const insertBtn = document.querySelector("#insert");
 const newItemBtn = document.querySelector("#newItemBtn");
 const taskListEl = document.querySelector("#taskList");
 const filterEl = document.querySelector(".filter");
+const stateSelectEl = document.querySelector("#state_selector");
 const dialogEl = document.querySelector("dialog");
 
 const allTasksArray = [];
@@ -32,12 +35,26 @@ newItemBtn.addEventListener('click', () => {
     dialogEl.showModal();
 })
 
+
+insertBtn.addEventListener('click', (e) => {
+    const taskInput = document.querySelector("#newTaskText");
+    const newTask = new Task(taskInput.value);
+    allTasksArray.push(newTask);
+    taskInput.value = '';
+
+    dialogEl.close();
+    renderTaskListGate();
+})
+
+stateSelectEl.addEventListener('change', renderTaskListGate);
+
 function renderTaskListGate() {
-    let taskArrayToRender;
+    let taskArrayToRender = allTasksArray;
+    
+    taskArrayToRender = filterListByState(taskArrayToRender, stateSelectEl.value);
+
     if(filterEl.value) {
-        taskArrayToRender = filterListByText(allTasksArray);
-    } else {
-        taskArrayToRender = allTasksArray;
+        taskArrayToRender = filterListByText(taskArrayToRender);
     }
 
     renderTaskList(taskArrayToRender);
@@ -56,6 +73,9 @@ function renderTaskList(taskArray) {
         const markCompleteCheckbox = document.createElement("input");
         markCompleteCheckbox.type = "checkbox";
         markCompleteCheckbox.id = task.id;
+        if(task.state === 'done') {
+            markCompleteCheckbox.checked = true;
+        }
         
         const deleteBtn = document.createElement('button');
         deleteBtn.setAttribute("class", "delete");
@@ -70,20 +90,19 @@ function renderTaskList(taskArray) {
             allTasksArray.splice(index, 1);
             renderTaskListGate();
         });
+
+        markCompleteCheckbox.addEventListener('click', () => {
+            if(markCompleteCheckbox.checked) {
+                task.state = "done";
+            } else {
+                task.state = "pending";
+            }
+        })
         
         taskListEl.appendChild(taskEl);
     }
 }
 
-insertBtn.addEventListener('click', (e) => {
-    const taskInput = document.querySelector("#newTaskText");
-    const newTask = new Task(taskInput.value);
-    allTasksArray.push(newTask);
-    taskInput.value = '';
-
-    dialogEl.close();
-    renderTaskListGate();
-})
 
 function filterListByText(taskArray) {
     const currentValue = filterEl.value;
@@ -96,6 +115,21 @@ function filterListByText(taskArray) {
     }
 
     return foundTasks;
+}
+
+function filterListByState(taskArray, state) {
+    if(stateSelectEl.value === 'all') {
+        return taskArray
+    } else {
+        const foundTasks = [];
+        for(const task of taskArray) {
+            console.log(`task: ${task}`)
+            if(task.state === state) {
+                foundTasks.push(task);
+            }
+        }
+        return foundTasks;
+    }
 }
 
 filterEl.addEventListener('keyup', renderTaskListGate);

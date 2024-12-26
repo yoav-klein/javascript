@@ -9,6 +9,7 @@
 
 input,
 textarea,
+select,
 button {
     font: inherit;
 }
@@ -41,7 +42,7 @@ body {
     box-shadow: 0 0 10px #333;
 }
 
-input[type="text"] {
+input[type="text"], select {
     padding: 5px;
 }
 
@@ -66,11 +67,16 @@ main {
 }
 
 
-#task-section {
+#task-section,
+#filter-section {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
+}
+
+#filter-section {
+    margin-bottom: 1em;
 }
 
 #taskList {

@@ -12,10 +12,18 @@
         <h1>To Do</h1>
     </header>
     <main>
-        <section id="task-section">
-            <h2>My Tasks</h2>
+        <section id="filter-section">
             <label for="filter">Filter</label>
             <input id="filter" type="text" class="filter">
+
+            <label for="state">State</label>
+            <select name="" id="state_selector">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="done">Done</option>
+            </select>
+        </section>
+        <section id="task-section">    
             <ul id="taskList">
                 
             </ul>
