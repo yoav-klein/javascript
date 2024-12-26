@@ -82,7 +82,7 @@ section {
     list-style-type: none;
 }
 
-.task {
+#taskList li {
     background-color: var(--TASK-BG-COLOR);
     margin: 1rem 0;
     padding: 1rem;
@@ -91,13 +91,15 @@ section {
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
-    
-    /* border: 1px solid gray;
-    border-radius: 5px; */
 }
 
-.task:hover {
+#taskList li label {
+    flex-grow: 1;
+}
+
+#taskList li:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -175,17 +177,17 @@ dialog button:hover {
 
 /* || CHECKBOX STYLING */
 
-.task label {
+#taskList li label {
     cursor: pointer;
     display: flex;
 }
 
-.task input[type="checkbox"] {
+#taskList li input[type="checkbox"] {
     appearance: none;
 }
 
 /* this will create our own checkbox icon */
-.task label::before {
+#taskList li label::before {
     content: '';
     width: 1em;
     height: 1em;
@@ -195,11 +197,11 @@ dialog button:hover {
 }
 
 /* hover effect */
-.task label:hover::before {
+#taskList li label:hover::before {
     background-color: #35E07D;
 }
 
-.task input[type="checkbox"]:checked + label::before {
+#taskList li input[type="checkbox"]:checked + label::before {
     content: '\002714';
     background-color: #27AE60;
     display: flex;
