@@ -12,6 +12,15 @@
         <h1>To Do</h1>
     </header>
     <main>
+        <section id="popup-container">
+            <div id="popup-content">
+                <h2 id="popup-h2">Task Name</h2>
+                <h3>Description</h3>
+                <p id="popup-description">Description of the task</p>
+                <h3>Due date</h3>
+                <p id="popup-duedate">Due date of the task</p>
+            </div>
+        </section>
         <section id="filter-section">
             <label for="filter">Filter</label>
             <input id="filter" type="text" class="filter">
@@ -32,8 +41,13 @@
             </div>
             <dialog>
                 <h3>New Task!</h3>
+                <label for="newTaskText">Task Name</label>
                 <input name="newTask" type="text" id="newTaskText">
+                <label for="newTaskDescription">Description</label>
+                <textarea name="description" id="newTaskDescription"></textarea>
                 <button id="insert">Insert</button>
+                <label for="duedate">Due Date</label>
+                <input type="date" id="duedate">
                 
             </dialog>
         </section>

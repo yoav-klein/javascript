@@ -1,19 +1,26 @@
 
 class Task {
     id;
+    name;
     description;
     state;
+    insertDate;
+    dueDate;
+
     
     generateUniqueId(prefix = "id") {
-        const timestamp = Date.now(); // Current timestamp in milliseconds
-        const randomNumber = Math.floor(Math.random() * 1000000); // Random number
+        const timestamp = Date.now();
+        const randomNumber = Math.floor(Math.random() * 1000000);
         return `${prefix}-${timestamp}-${randomNumber}`;
     }
 
-    constructor(description) {
+    constructor(name, description, dueDate) {
+        this.name = name;
         this.description = description;
+        this.dueDate = new Date(dueDate);
         this.id = this.generateUniqueId();
         this.state = "pending";
+        this.insertDate = Date.now();
     }
 }
 
@@ -26,6 +33,7 @@ const taskListEl = document.querySelector("#taskList");
 const filterEl = document.querySelector(".filter");
 const stateSelectEl = document.querySelector("#state_selector");
 const dialogEl = document.querySelector("dialog");
+const popupContainerEl = document.querySelector("#popup-container");
 
 const allTasksArray = [];
 
@@ -37,16 +45,32 @@ newItemBtn.addEventListener('click', () => {
 
 
 insertBtn.addEventListener('click', (e) => {
-    const taskInput = document.querySelector("#newTaskText");
-    const newTask = new Task(taskInput.value);
+    const taskInputEl = document.querySelector("#newTaskText");
+    const taskDescriptionEl = document.querySelector("#newTaskDescription");
+    const dueDateEl = document.querySelector("#duedate");
+    const newTask = new Task(taskInputEl.value, taskDescriptionEl.value, dueDateEl.value);
+    
     allTasksArray.push(newTask);
-    taskInput.value = '';
+    
+    taskDescriptionEl.value = ''; 
+    taskInputEl.value = '';
 
     dialogEl.close();
     renderTaskListGate();
 })
 
+filterEl.addEventListener('keyup', renderTaskListGate);
+
+popupContainerEl.addEventListener('click', e => {
+    if(e.target === popupContainerEl) {
+        popupContainerEl.style.display = "none";
+        document.body.removeClass("modal-active");
+    }
+})
+
 stateSelectEl.addEventListener('change', renderTaskListGate);
+
+/** FUNCTIONS */
 
 function renderTaskListGate() {
     let taskArrayToRender = allTasksArray;
@@ -65,9 +89,9 @@ function renderTaskList(taskArray) {
 
     for(const task of taskArray) {
         const taskEl = document.createElement("li");
-    
+        
         const labelEl = document.createElement("label");
-        labelEl.textContent = task.description;
+        labelEl.textContent = task.name;
         labelEl.setAttribute('for', task.id);
     
         const markCompleteCheckbox = document.createElement("input");
@@ -97,6 +121,25 @@ function renderTaskList(taskArray) {
             } else {
                 task.state = "pending";
             }
+            renderTaskListGate();
+        })
+        
+        // on click on the label, open a popup
+        labelEl.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const popupH2El = document.querySelector("#popup-h2");
+            const popupDescriptionEl = document.querySelector("#popup-description");
+            const popupDueDateEl = document.querySelector("#popup-duedate");
+
+            document.body.classList.add("modal-active");
+            popupContainerEl.style.display = "flex";
+            const id = e.target.getAttribute("for");
+            const task = allTasksArray.findIndex(t => t.id === id);
+            popupH2El.textContent = allTasksArray[task].name;
+            popupDescriptionEl.textContent = allTasksArray[task].description;
+            popupDueDateEl.textContent = allTasksArray[task].dueDate.toDateString();
+
         })
         
         taskListEl.appendChild(taskEl);
@@ -109,7 +152,7 @@ function filterListByText(taskArray) {
     const foundTasks = [];
     
     for(const task of taskArray) {
-        if(task.description.toLowerCase().includes(currentValue.toLowerCase())) {
+        if(task.name.toLowerCase().includes(currentValue.toLowerCase())) {
             foundTasks.push(task);
         }
     }
@@ -132,4 +175,4 @@ function filterListByState(taskArray, state) {
     }
 }
 
-filterEl.addEventListener('keyup', renderTaskListGate);
+
