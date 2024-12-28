@@ -91,8 +91,11 @@ function renderTaskList(taskArray) {
         const taskEl = document.createElement("li");
         
         const labelEl = document.createElement("label");
-        labelEl.textContent = task.name;
         labelEl.setAttribute('for', task.id);
+        
+        const pEl = document.createElement("p");
+        pEl.setAttribute('data-id', task.id);
+        pEl.textContent = task.name;
     
         const markCompleteCheckbox = document.createElement("input");
         markCompleteCheckbox.type = "checkbox";
@@ -107,6 +110,7 @@ function renderTaskList(taskArray) {
         
         taskEl.appendChild(markCompleteCheckbox);
         taskEl.appendChild(labelEl);
+        taskEl.appendChild(pEl);
         taskEl.appendChild(deleteBtn);
     
         deleteBtn.addEventListener('click', () => {
@@ -125,7 +129,7 @@ function renderTaskList(taskArray) {
         })
         
         // on click on the label, open a popup
-        labelEl.addEventListener('click', (e) => {
+        pEl.addEventListener('click', (e) => {
             e.preventDefault();
 
             const popupH2El = document.querySelector("#popup-h2");
@@ -134,7 +138,7 @@ function renderTaskList(taskArray) {
 
             document.body.classList.add("modal-active");
             popupContainerEl.style.display = "flex";
-            const id = e.target.getAttribute("for");
+            const id = e.target.getAttribute("data-id");
             const task = allTasksArray.findIndex(t => t.id === id);
             popupH2El.textContent = allTasksArray[task].name;
             popupDescriptionEl.textContent = allTasksArray[task].description;

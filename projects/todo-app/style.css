@@ -98,7 +98,7 @@ main {
     gap: 1rem;
 }
 
-#taskList li label {
+#taskList li p {
     flex-grow: 1;
 }
 
