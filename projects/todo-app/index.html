@@ -15,10 +15,14 @@
         <section id="popup-container">
             <div id="popup-content">
                 <h2 id="popup-h2">Task Name</h2>
-                <h3>Description</h3>
-                <p id="popup-description">Description of the task</p>
-                <h3>Due date</h3>
-                <p id="popup-duedate">Due date of the task</p>
+                <div class="popup-part">
+                    <h3>Description</h3>
+                    <p id="popup-description">Description of the task</p>
+                </div>
+                <div class="popup-part">
+                    <h3>Due date</h3>
+                    <p id="popup-duedate">Due date of the task</p>
+                </div>
             </div>
         </section>
         <section id="filter-section">
@@ -40,15 +44,20 @@
                 <button class ="newItemBtn" id="newItemBtn">+</button>
             </div>
             <dialog>
-                <h3>New Task!</h3>
-                <label for="newTaskText">Task Name</label>
-                <input name="newTask" type="text" id="newTaskText">
-                <label for="newTaskDescription">Description</label>
-                <textarea name="description" id="newTaskDescription"></textarea>
+                <h1>New Task!</h1>
+                <div class="form-control">
+                    <label for="newTaskText">Task Name</label>
+                    <input name="newTask" type="text" id="newTaskText" placeholder="Enter task name">
+                </div>
+                <div class="form-control">
+                    <label for="newTaskDescription">Description</label>
+                    <textarea name="description" id="newTaskDescription" rows="4" placeholder="Enter task description"></textarea>                    
+                </div>
+                <div class="form-control">
+                    <label for="duedate">Due Date</label>
+                    <input type="date" id="duedate">
+                </div>
                 <button id="insert">Insert</button>
-                <label for="duedate">Due Date</label>
-                <input type="date" id="duedate">
-                
             </dialog>
         </section>
     </main>

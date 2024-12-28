@@ -6,18 +6,24 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+/* 
 input,
 textarea,
 select,
 button {
     font: inherit;
-}
+} */
 
 /* || VARIABLES */
 
 :root {
+    /* colors */
     --LIGHT-GREEN: #4CAF50;
+    --LIGHT-GRAY: #555;
+
+    /* fonts*/
+    --FF: Arial, sans-serif;
+
     --BODY-BG-COLOR: #f5f5f5;
     --TASK-BG-COLOR: #e8f5e9;
     --HEADER-BG-COLOR: var(--LIGHT-GREEN);
@@ -33,6 +39,7 @@ button {
 
 html {
     background-color: white;
+    font-family: var(--FF);
 }
 
 body {
@@ -53,10 +60,6 @@ header {
     text-align: center;
     padding: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1, h2, h3 {
-    margin-bottom: 1rem;
 }
 
 h2 {
@@ -100,6 +103,7 @@ main {
 
 #taskList li p {
     flex-grow: 1;
+    cursor: default;
 }
 
 #taskList li:hover {
@@ -133,6 +137,8 @@ main {
     transform: scale(1);
 }
 
+/* || DIALOG */
+
 dialog {
     margin: auto;
     
@@ -146,26 +152,59 @@ dialog {
 }
 
 
-dialog h3 {
+dialog h1 {
     margin-top: 0;
     color: var(--LIGHT-GREEN);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+dialog .form-control {
+    margin-bottom: 15px;
+}
+
+dialog label {
+    display: block;
+    color: var(--LIGHT-GRAY);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+dialog input[type="text"],
+dialog input[type="date"],
+dialog textarea {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 0.15em;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease-in-out;
 }
 
 
-dialog input[type="text"] {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 0.15em;
-    margin-bottom: 1rem;
+input[type="text"]:focus,
+input[type="date"]:focus,
+dialog textarea:focus {
+  border-color: var(--LIGHT-GREEN);
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+}
+
+
+textarea {
+    resize: none;
 }
 
 
 dialog button {
-    background-color: #4CAF50;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--LIGHT-GREEN);
     color: white;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -227,6 +266,17 @@ dialog button:hover {
     width: 100%;
 }
 
+#popup-container h2 {
+    margin-bottom: 1rem;
+}
+#popup-container h3 {
+    margin-bottom: 0.5rem;
+}
+
+.popup-part {
+    margin-bottom: 2rem;
+}
+
 #popup-content {
     background-color: #ffffff;
     border-radius: var(--BORDER-RADIUS);
@@ -234,6 +284,10 @@ dialog button:hover {
     border: none;
     padding: 1em;
     width: 50%;
+}
+
+#popup-content h3 {
+    /* margin-bottom: 0.5rem; */
 }
 
 .modal-active {
