@@ -114,3 +114,12 @@ function groupBy(arr, fn) {
 const fn = (element) => element.type;
 console.log(groupBy([{ a: 1, type: "car" }, { b: 1, type: "car" }, { a:2, type: "animal" }], fn));
 
+// another alternative
+const groupBy2 = (arr, fn) =>
+    arr.reduce((acc, item) => {
+        const key = fn(item);
+        (acc[key] ||= []).push(item);
+        return acc;
+    }, {});
+    
+    console.log(groupBy2([{ a: 1, type: "car" }, { b: 1, type: "car" }, { a:2, type: "animal" }], fn));
