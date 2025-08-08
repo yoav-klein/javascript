@@ -106,3 +106,14 @@ for (const key in arr) {
 // Spreading into an object uses property enumeration, not the array's iterator
 const objectSpread = { ...arr }; // { '0': 1, '1': 2, '4': 5 }
 
+// SPREAD SYNTAX
+
+const myArr = [1, 2, 3, 4];
+const copyArr = [...myArr];
+console.log(copyArr);
+
+function sumThree(x, y, z) {
+  return x + y + z;
+}
+
+console.log(sumThree(...copyArr));

@@ -84,3 +84,14 @@ Car.prototype.displayCar = function () {
 };
 
 myToyota.displayCar();
+
+// SPREAD SYNTAX
+
+const me = {
+  name: "Yoav",
+  age: 39,
+  profession: "Jobless"
+};
+
+const myClone = {...me};
+console.log(myClone);
