@@ -123,3 +123,17 @@ const groupBy2 = (arr, fn) =>
     }, {});
     
     console.log(groupBy2([{ a: 1, type: "car" }, { b: 1, type: "car" }, { a:2, type: "animal" }], fn));
+
+
+/**
+ * SPREAD SYNTAX
+ * 
+ * MERGE ARRAYS
+ * 
+ *  */ 
+
+function mergeArrays(arr1, arr2) {
+    return [...arr1, ...arr2];
+}
+
+console.log(mergeArrays(["a", "b", "c"], ["d", "e", "f"]));
