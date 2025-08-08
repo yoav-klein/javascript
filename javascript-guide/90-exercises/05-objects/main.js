@@ -80,3 +80,14 @@ console.log(myObj.a); // 7
 console.log(myObj.b); // 8, returned from the get b() method
 myObj.c = 50; // Calls the set c(x) method
 console.log(myObj.a); // 25
+
+/**
+ * SPREAD SYNTAX
+ * 
+ * COPY AND MODIFY AN OBJECT
+ */
+
+const user = { name: "Alice", age: 25 };
+const anotherUser = {...user};
+anotherUser.age = 26;
+anotherUser.city = "Tel Aviv";
