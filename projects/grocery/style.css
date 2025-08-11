@@ -1,0 +1,59 @@
+/* || RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply a smooth font rendering and a global font */
+html {
+  font-size: 16px; /* Base size for rem units */
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  color: #333; /* Default text color */
+  background-color: #f9f9f9; /* Light background */
+}
+
+/* Make images and media scale down nicely */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Remove underline from links by default */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make buttons and inputs inherit fonts */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+body {
+    width: 70%;
+    margin: auto;
+    box-shadow: 0 0 10px black;
+    background-color: rgb(229, 248, 241);
+    min-height: 100vh;
+}
+
+/* || HEADER */
+
+header {
+    height: 5rem;
+    background-color: rgb(127, 255, 212);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    text-align: center;
+}
