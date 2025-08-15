@@ -8,6 +8,7 @@
     --TEXT-COLOR: #e6e6ef;
     --ACCENT-COLOR: #5e63ff;
     --SECONDARY-TEXT-COLOR: #b0b3c1;
+    --HEADER-HEIGHT: 4rem;
 }
 
 * {
@@ -24,6 +25,7 @@ textarea {
 }
 
 
+
 html {
     font-family: Poppins, 'Segoe UI', sans-serif;
     line-height: 1.5rem;
@@ -33,10 +35,38 @@ body {
     min-height: 100vh;
     background-color: var(--BASE-COLOR);
     color: var(--TEXT-COLOR);
-    display: grid;
-    grid-template-columns: auto 1fr;
 }
 
+header {
+    height: var(--HEADER-HEIGHT);
+    border-bottom: 1px solid var(--LINE-COLOR);
+    display: flex;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--BASE-COLOR);
+}
+
+#menu-button {
+    border: none;
+    border-radius: .5em;
+    margin-left: 1rem;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#menu-button:hover {
+    background-color: var(--HOVER-COLOR);
+}
+
+/* the containers in the main content */
 .container {
     margin: 1rem;
     border: 1px solid var(--LINE-COLOR);
@@ -44,18 +74,24 @@ body {
     padding: 1rem;
 }
 
+.layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    position: relative;
+}
+
 #sidebar {
-    min-height: 100vh;
+    min-height: calc(100vh - var(--HEADER-HEIGHT));
     width: 250px;
     padding: 5px 1em;
     border-right: 1px solid var(--LINE-COLOR);
 
     /* sticky positioning so that when we scroll down, the sidebar will stay in place */
     position: sticky;
-    top: 0;
+    top: var(--HEADER-HEIGHT);
     align-self: start;
     transition: 300ms ease-in-out;
-
+    z-index: 1000; /* be on top of overlay */
     overflow: hidden;
 }
 
@@ -68,18 +104,6 @@ body {
     list-style-type: none;
 }
 
-/* have the logo stick to the right side*/
-
-#sidebar > ul > li:first-child {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-    align-items: center;
-}
-
-.logo {
-    font-weight: 600;
-}
 
 /* setting a different style to the active tab */
 #sidebar ul li.active a {
@@ -155,24 +179,38 @@ body {
     padding-left: 2em;
 }
 
-/* || TOGGLE BUTTON */
-#toggle-button {
-    padding: 1em;
-    flex-shrink: 0;
-    margin-left: auto;
-    border: none;
-    border-radius: .5em;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* || MOBILE SCREEN */
 
-    svg {
-        transition: rotate ease 150ms;
+@media (max-width: 768px) {
+    #sidebar {
+        background-color: var(--BASE-COLOR);
+        position: fixed;
+        top: var(--HEADER-HEIGHT);
+        left: 0;
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     }
-}
+ 
+    #sidebar.close {
+        transform: translateX(-100%);
+    }
+    
+    .overlay {
+        position: fixed;
+        top: var(--HEADER-HEIGHT);
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
 
-#toggle-button:hover {
-    background-color: var(--HOVER-COLOR);
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
 }

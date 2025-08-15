@@ -1,24 +1,28 @@
 
 
-const toggleSidebarButtonEl = document.getElementById("toggle-button");
+const toggleSidebarButtonEl = document.getElementById("menu-button");
 const dropDownMenuButtonEl = document.querySelector(".dropdown-button");
 const sidebarEl = document.getElementById("sidebar");
 const subMenuEl = document.querySelector(".sub-menu");
 
-toggleSidebarButtonEl.addEventListener('click', toggleSidebar);
 dropDownMenuButtonEl.addEventListener('click', toggleSubMenu);
+toggleSidebarButtonEl.addEventListener('click', toggleSidebar);
 
 function toggleSidebar() {
     // when closing the sidebar with the drop-down open, close it
     if(subMenuEl.classList.contains('show')) {
-        subMenuEl.classList.toggle('show');
+        subMenuEl.classList.remove('show');
         dropDownMenuButtonEl.classList.toggle('rotate');
     }
 
-    sidebarEl.classList.toggle('close');
-    toggleSidebarButtonEl.classList.toggle('rotate');
-
+    const overlayEl = document.getElementById('overlay');
+    const isMobile = window.innerWidth <= 768;
     
+    sidebarEl.classList.toggle('close');
+    
+    if (isMobile) {
+        overlayEl.classList.toggle('active');
+    }
 }
 
 function toggleSubMenu() {
