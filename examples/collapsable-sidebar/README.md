@@ -1,7 +1,7 @@
 # Collapsable Sidebar
 ---
 
-based on https://www.youtube.com/watch?v=R7b3OlEyqug
+based on https://www.youtube.com/watch?v=R7b3OlEyqug, but with some tweeks.
 
 This is a demonstration of a collapsable sidebar with a menu. The menu also contains menu items 
 that open into a sub-menu.
