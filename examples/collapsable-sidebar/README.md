@@ -23,3 +23,7 @@ a class with `display: none` and `display: block`, transition won't work. (why? 
 So the trick we do is make the submenu as a grid, and then include in it only one div, and then toggle the 
 `grid-template-rows` property - 0 and 1.
 
+## Responsiveness
+when opening in small screens (mobile devices) we change to toggle the `transform: translateX()` CSS property. This is due to better performance.
+In small screens, we want the menu to be on top of the main content, not the main content shrink a little like in a big screen.
+For this, we use `position: fixed` on the sidebar.
