@@ -24,8 +24,6 @@ textarea {
     font: inherit;
 }
 
-
-
 html {
     font-family: Poppins, 'Segoe UI', sans-serif;
     line-height: 1.5rem;
@@ -126,7 +124,7 @@ header {
 /* since the dropdown button is a button, we need some styles to make it look like the <a> elements */
 .dropdown-button {
     width: 100%;
-    text-align: left;
+    text-align: start;
     background: none;
     border: none;
     cursor: pointer;
@@ -176,7 +174,7 @@ header {
 
 /* have the submenu items idented */
 #sidebar .sub-menu a {
-    padding-left: 2em;
+    padding-inline-start: 2em;
 }
 
 /* || MOBILE SCREEN */
