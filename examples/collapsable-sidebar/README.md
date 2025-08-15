@@ -1,6 +1,8 @@
 # Collapsable Sidebar
 ---
 
+based on https://www.youtube.com/watch?v=R7b3OlEyqug
+
 This is a demonstration of a collapsable sidebar with a menu. The menu also contains menu items 
 that open into a sub-menu.
 

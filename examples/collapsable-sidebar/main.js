@@ -28,7 +28,7 @@ function toggleSubMenu() {
     // if submenu button clicked and sidebar is closed, open it
     if(sidebarEl.classList.contains('close')) {
         sidebarEl.classList.toggle('close');
-        toggleSidebarButtonEl.toggle('rotate');
+        toggleSidebarButtonEl.classList.toggle('rotate');
     }
 }
 
