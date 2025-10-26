@@ -1,23 +1,18 @@
 
+const overlayEl = document.getElementById('overlay');
 
 const toggleSidebarButtonEl = document.getElementById("menu-button");
-const dropDownMenuButtonEl = document.querySelector(".dropdown-button");
-const sidebarEl = document.getElementById("sidebar");
-const subMenuEl = document.querySelector(".sub-menu");
-
-dropDownMenuButtonEl.addEventListener('click', toggleSubMenu);
 toggleSidebarButtonEl.addEventListener('click', toggleSidebar);
+const sidebarEl = document.getElementById("sidebar");
+
+const subMenuButtons = document.querySelectorAll(".dropdown-button");
+subMenuButtons.forEach(btn => btn.addEventListener('click', toggleSubMenu));
 
 function toggleSidebar() {
-    // when closing the sidebar with the drop-down open, close it
-    if(subMenuEl.classList.contains('show')) {
-        subMenuEl.classList.remove('show');
-        dropDownMenuButtonEl.classList.toggle('rotate');
-    }
-
-    const overlayEl = document.getElementById('overlay');
-    const isMobile = window.innerWidth <= 768;
+    // when closing the sidebar with any of the sub-menus open, close them
+    Array.from(sidebarEl.getElementsByClassName('show')).forEach(ul => ul.classList.remove('show'));
     
+    const isMobile = window.innerWidth <= 768;
     sidebarEl.classList.toggle('close');
     
     if (isMobile) {
@@ -25,9 +20,11 @@ function toggleSidebar() {
     }
 }
 
-function toggleSubMenu() {
+function toggleSubMenu(e) {
+    
+    const subMenuEl = e.currentTarget.nextElementSibling;
     subMenuEl.classList.toggle('show');
-    dropDownMenuButtonEl.classList.toggle('rotate');
+    e.currentTarget.classList.toggle('rotate');
     
     // if submenu button clicked and sidebar is closed, open it
     if(sidebarEl.classList.contains('close')) {

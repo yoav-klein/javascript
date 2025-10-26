@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rounded {
+            border-radius: 5px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <button>First</button>
+            <div>First</div>
+        </li>
+        <li>
+            <button>Second</button>
+            <div>Second</div>
+        </li>
+        <li>
+            <button>Third</button>
+            <div>Third</div>
+        </li>
+    </ul>
+    <script>
+        function btnClick(e) {
+            console.log('clickkk');
+            e.target.nextElementSibling.classList.toggle('bold');
+        }
+
+        document.querySelectorAll("button").forEach(btn => btn.addEventListener('click', btnClick));
+        
+    </script>
+</body>
+</html>
