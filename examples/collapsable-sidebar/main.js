@@ -10,7 +10,10 @@ subMenuButtons.forEach(btn => btn.addEventListener('click', toggleSubMenu));
 
 function toggleSidebar() {
     // when closing the sidebar with any of the sub-menus open, close them
-    Array.from(sidebarEl.getElementsByClassName('show')).forEach(ul => ul.classList.remove('show'));
+    Array.from(sidebarEl.getElementsByClassName('show')).forEach(ul => {
+        ul.classList.remove('show');
+        ul.previousElementSibling.classList.toggle('rotate');
+    });
     
     const isMobile = window.innerWidth <= 768;
     sidebarEl.classList.toggle('close');
