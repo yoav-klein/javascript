@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Users</h1>
+    <ul id="user-list">
+
+    </ul>
+    <hr>
+    <h3>New user</h3>
+    <label for="username">Name</label>
+    <input type="text" id="username">
+    <label for="age">Age</label>
+    <input type="text" id="age">
+    <button id="submit-button">Submit!</button>
+    <hr>
+    <button id="notfoundbutton">Not found</button>
+    <p id="notfoundtext"></p>
+    <hr>
+    <button id="servererrorbutton">Server error</button>
+    <p id="servererrortext"></p>
+    
+
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
