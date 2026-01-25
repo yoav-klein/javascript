@@ -6,13 +6,19 @@ function createCommon(callbacks) {
         callback1, callback2
     } = callbacks;
 
-    function run() {
-        console.log("Run");
+    function foo() {
+        console.log("Foo");
         callback1();
         callback2();
     }
 
-    return run;
+    function bar() {
+        console.log("Bar");
+        callback1();
+        callback2();
+    }
+
+    return { foo, bar };
 }
 
 export { createCommon };
