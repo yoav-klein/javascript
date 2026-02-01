@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Hello</h1>
+        <div style="margin: 0 auto;">
+            <h2>Add Tenant</h2>
+            <p style="width: 100%;">Hello</p>
+        </div>
+    </main>
+    <script>
+
+        class HttpError extends Error {
+            constructor(response) {
+                super();
+                this.response = response;
+            }
+        }
+
+        fetch('http://localhost:5000/echo?code=400', { method: 'post' })
+        .then(response => {
+            if(!response.ok) throw new HttpError(response);
+            return response.text()
+        })
+        .then(text => console.log(text))
+        .catch(err => {
+            // if not an HttpError, handle unknown error and return
+            if(!(err instanceof HttpError)) {
+                handleUnknownError(err);
+                return;
+            }
+            
+            const response = err.response;
+            
+            return response.json()
+                .then(data => {
+                    if(!data.type) {
+                        throw new Error('unknown schema');
+                    }
+                    problemDetailHandler(data);
+                })
+                .catch(() => { // can't parse JSON, or unknown schema
+                    statusCodeHandler(response); 
+            });
+        });
+
+        function handleUnknownError(err) { console.log("UNKNWON ERROR: " + err); }
+
+        function statusCodeHandler(response) {
+            console.log(response.status);
+        }
+
+        function problemDetailHandler(body) {
+            console.log("Handling RFC 9457 error");
+        }
+
+
+    </script>
+</body>
+</html>
